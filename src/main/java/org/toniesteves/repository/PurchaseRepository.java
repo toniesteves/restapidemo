@@ -1,11 +1,15 @@
 package org.toniesteves.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.toniesteves.model.Purchase;
 
-public interface PurchaseRepository extends CrudRepository<Purchase, Long>{
+public interface PurchaseRepository extends JpaRepository<Purchase, Long>{
 	
-	ResponseEntity<Purchase> findByClient(String client);
+	List<Purchase> findByClientOrProductOrCategory(String client, String product, String category);
+	
 
+
+	
 }

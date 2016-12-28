@@ -1,6 +1,7 @@
 package org.toniesteves.rest;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.toniesteves.model.Purchase;
 import org.toniesteves.repository.PurchaseRepository;
-
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -28,20 +29,29 @@ public class PurchaseRestService {
 	private PurchaseRepository repository;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Purchase>> get() {
-		List<Purchase> purchases = (List<Purchase>) repository.findAll();
-		if (purchases.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(purchases);
+	public ResponseEntity<List<Purchase>> get(@RequestParam Map<String, String> params) {
+		List<Purchase> purchases;
+		
+		if (params.get("client") != null || params.get("product") != null || params.get("category") != null) {
+			purchases = repository.findByClientOrProductOrCategory(params.get("client"), params.get("product"), params.get("category"));
+			
+			return ResponseEntity.status(HttpStatus.OK).body(purchases);
+
+		} else {
+			purchases = repository.findAll();
+			if (purchases.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).body(purchases);
+			}
+			return ResponseEntity.status(HttpStatus.OK).body(purchases);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(purchases);
+
 	}
-	
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<Purchase> findById(@PathVariable("id") Long id) {
-		
+
 		Purchase purchase = repository.findOne(id);
-		
+
 		return new ResponseEntity<Purchase>(purchase, HttpStatus.OK);
 
 	}
@@ -71,7 +81,6 @@ public class PurchaseRestService {
 		repository.save(purchase);
 
 		return ResponseEntity.status(HttpStatus.OK).body(purchase);
-
 
 	}
 
