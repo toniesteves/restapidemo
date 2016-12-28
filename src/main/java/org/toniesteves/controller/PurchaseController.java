@@ -1,9 +1,8 @@
-package com.example.controller;
+package org.toniesteves.controller;
 
 import java.util.List;
-
+import java.util.Optional;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.model.Purchase;
-import com.example.repository.PurchaseRepository;
+import org.toniesteves.model.Purchase;
+import org.toniesteves.repository.PurchaseRepository;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -28,7 +27,7 @@ public class PurchaseController {
 	private PurchaseRepository repository;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Purchase>> get() {
+	public ResponseEntity<List<Purchase>> get(@RequestParam(value="client") String client) {
 		List<Purchase> purchases = (List<Purchase>) repository.findAll();
 		if (purchases.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(purchases);

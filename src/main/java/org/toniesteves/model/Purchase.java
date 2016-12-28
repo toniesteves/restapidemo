@@ -1,4 +1,4 @@
-package com.example.model;
+package org.toniesteves.model;
 
 import java.util.Date;
 import java.util.Map;

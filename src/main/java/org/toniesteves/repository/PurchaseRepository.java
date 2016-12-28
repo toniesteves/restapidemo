@@ -1,8 +1,7 @@
-package com.example.repository;
+package org.toniesteves.repository;
 
 import org.springframework.data.repository.CrudRepository;
-
-import com.example.model.Purchase;
+import org.toniesteves.model.Purchase;
 
 public interface PurchaseRepository extends CrudRepository<Purchase, Long>{
 
