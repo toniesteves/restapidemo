@@ -1,4 +1,4 @@
-package org.toniesteves;
+package org.toniesteves.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
