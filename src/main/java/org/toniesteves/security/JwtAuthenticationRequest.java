@@ -2,10 +2,9 @@ package org.toniesteves.security;
 
 import java.io.Serializable;
 
-/**
- * Created by stephan on 20.03.16.
- */
-public class  JwtAuthenticationRequest implements Serializable {
+import lombok.Data;
+
+public @Data class  JwtAuthenticationRequest implements Serializable {
 
     private static final long serialVersionUID = -8445943548965154778L;
 
@@ -21,19 +20,4 @@ public class  JwtAuthenticationRequest implements Serializable {
         this.setPassword(password);
     }
 
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
