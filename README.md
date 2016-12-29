@@ -21,10 +21,16 @@ There are three user accounts present to demonstrate the different levels of acc
 
 There are three endpoints that are reasonable for the demo:
 
-* /auth - authentication endpoint with unrestricted access
-* /purchases - an example endpoint that is restricted to authorized users (a valid JWT token must be present in the request header)
-* /protected - an example endpoint that is restricted to authorized users with the role 'ROLE_ADMIN' (a valid JWT token must be present in the request header)
+* **/auth** - authentication endpoint with unrestricted access
+* **/purchase**s - an example endpoint that is restricted to authorized users (a valid JWT token must be present in the request header)
+* **/protected** - an example endpoint that is restricted to authorized users with the role 'ROLE_ADMIN' (a valid JWT token must be present in the request header)
 I've written a small Javascript client and put some comments in the code that hopefully makes this demo understandable.
+
+There are also two branches in repository: 
+
+* **only-backend** - Just contains backend API code. To interact with him should be used some client to make requests to API, like [postman](https://www.getpostman.com/).
+
+* **client+backend** - Contains backend conde and a small view code either, like a client. **Master** and **development** branch was updated from this branch.
 
 # Generating password hash for new users
 
